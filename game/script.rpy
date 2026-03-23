@@ -7,6 +7,7 @@ define e = Character("Eileen")
 define phone = Character("Phone")
 define mom = Character("Mom")
 define jj = Character("Java Joe")
+define em = Character("Espresso Machine")
 
 
 # The game starts here.
@@ -78,24 +79,28 @@ label start:
 
     jj "Well, anyways, we need you back here. The morning rush is about to come and-"
 
-    cm "BBBRRRRRRRRRRRRRRRRRRRRRR"
+    em "BBBRRRRRRRRRRRRRRRRRRRRRR"
 
     jj "And we need you."
 
     mc "What's with that noise?"
 
-    jj "It's a new espresso machine."
+    jj "It's just the new espresso machine."
 
     mc "Are you sure it's new...?"
 
-    jj "It is new. The packaging said after some uses it won't be that loud anymore."
+    jj "It is new, it's just like that for now. The packaging said after some uses it won't be that loud anymore."
 
-    jj "Don't worry about the sound though. It's loud, so if you don't hear a customer, just ask them to repeat themselves."
+    jj "Worry about the customers, not the sound. If you don't hear a customer, just ask them to repeat themselves."
 
     mc "Alright..."
 
-    # SHIFT 1: START
+    mc "Maybe I can find a customer to be my date to the wedding!"
+
+    # SHIFT 1: START -- add some sort of title card
     # Bad ending: getting fired for messing up orders
+
+    mc "I can help the next customer!"
 
     # These display lines of dialogue.
 
