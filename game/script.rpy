@@ -67,11 +67,35 @@ label start:
     jj "[mc]! Where have you been? You're 7 minutes and 46 seconds late."
 
     menu where_been:
-        "I..."
-
+        "..."
         "I don't have to explain myself to you, Java Joe.":
+            jj "What's with the attitude?"
 
+        "My mom was texting me. She wants me to find a date.":
+            jj "You know, that's not a valid excuse to be late."
 
+        ""
+
+    jj "Well, anyways, we need you back here. The morning rush is about to come and-"
+
+    cm "BBBRRRRRRRRRRRRRRRRRRRRRR"
+
+    jj "And we need you."
+
+    mc "What's with that noise?"
+
+    jj "It's a new espresso machine."
+
+    mc "Are you sure it's new...?"
+
+    jj "It is new. The packaging said after some uses it won't be that loud anymore."
+
+    jj "Don't worry about the sound though. It's loud, so if you don't hear a customer, just ask them to repeat themselves."
+
+    mc "Alright..."
+
+    # SHIFT 1: START
+    # Bad ending: getting fired for messing up orders
 
     # These display lines of dialogue.
 
