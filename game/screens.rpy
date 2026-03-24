@@ -565,6 +565,8 @@ screen about():
             if gui.about:
                 text "[gui.about!t]\n"
 
+            text _("Brewing Affection was made as part of the {a=https://www.renpy.org/}Sound Game Jam{/a}.")
+
             text _("Made with {a=https://www.renpy.org/}Ren'Py{/a} [renpy.version_only].\n\n[renpy.license!t]")
 
 
