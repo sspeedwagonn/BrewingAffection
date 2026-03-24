@@ -15,7 +15,12 @@ define ac = Character("Anthony Cino")
 define unknown = Character("???")
 define ct = Character("Customer Tutorialman")
 
-
+default fired = 0
+default matt = 0
+default amir = 0
+default cole = 0
+default brae = 0
+default anthony = 0
 # The game starts here.
 
 label start:
@@ -32,9 +37,15 @@ label start:
 
     show eileen happy
 
+    #Empty room
+
     "Oh no, I'm almost late for work!"
 
-    "My name tag! Oh gosh, the name rubbed off... let me write it again."
+    #MC appears in front of a mirror
+
+    "Looking good... wait, I'm missing something!"
+
+    "My name tag! Oh gosh, the name must have rubbed off... let me write it again."
 
     $ mc = renpy.input("Write your name!", length=32)
 
@@ -104,11 +115,11 @@ label start:
 
     mc "What's with that noise?"
 
-    jj "It's just the new espresso machine."
+    jj "It's just the mew espresso machine."
 
-    mc "Are you sure it's new...?"
+    mc "Are you sure it's \"mew\"...?"
 
-    jj "It is new, it's just like that for now. The packaging said after some uses it won't be that loud anymore."
+    jj "It is mew, it's just like that for now. The packaging said after some uses it won't be that loud anymore."
 
     jj "Worry about the customers, not the sound. If you don't hear a customer, just ask them to repeat themselves."
 
@@ -119,7 +130,7 @@ label start:
     mc "Maybe I can find a customer to be my date to the wedding!"
 
     # SHIFT 1: START -- add some sort of title card
-    # Bad ending: getting fired for messing up orders
+    # Bad ending available: getting fired for messing up orders
 
     mc "I can help the next customer!"
 
@@ -128,7 +139,7 @@ label start:
 
     mc "Sure..."
 
-    ct "My name is Customer Tutorialman. Do you know what you're doing?"
+    ct "My name is Customer Tutorialman. Do you know how to make coffee?"
 
     menu tutorial_q:
         "No, I could use a tutorial.":
@@ -137,22 +148,68 @@ label start:
         "Of course I do.":
             ct "Well, suit yourself! That's all. I didn't really want a coffee."
             jump shift_one
-
+# SHIFT ONE: get to know the potential love interests
     label shift_one:
         hide ct
         mc "Let's get this shift started!"
 
+
+        #Introduction to matt white, if the
         show mw
-        mw "Hi, one flat white, please!"
+        unknown "Hi, one flat white, please! For Matt White."
 
         menu mw_int_1:
-            "Sure, I'll get that started for you!":
+            "Sure, I'll get that started for you!": #nuetral
                 mw "Great, thanks!"
 
-            ""
+            "Matt White": #pos
+                mc "Matt white"
 
+            "Hell no!": #neg and fired++
+                unknown "Uh... okay."
+                mc "Next!"
+                $ fired -= 1
+
+        if fired = -1: #first and only warning, add this check better later on.
+            jj "[mc]! That's not how we treat customers. Don't forget, this is an at-will employement state. I will fire you if you drive away my customers!"
+        # End of shift
+        # If fired = 3, player gets fired and game ends
+        if fired <= -3:
+            jump bad_ending_fired
+        menu talk_sister_1:
+            "Should I text my sister...?"
+
+            "I should.":
+                jump text_sister_1
+
+            "No, I won't.":
+                mc "She's probably too busy prepping for her wedding."
+
+# SHIFT TWO: Get to know them better
+
+# SHIFT THREE: Ones who the MC shows interest in start to appear frequently, divulge more
+
+# SHIFT FOUR: Based on pursued LI
+
+# SHIFT FIVE: The confession, based on pursued LI
+
+# ENDINGS
     return
 
 label tutorial:
     ct "Let's start with taking orders."
     jump shift_one
+
+label bad_ending_fired:
+    jj "[mc], we talked about this, and frankly, I'm so disappointed I can't even make a cat pun."
+    mc "But-"
+    jj "I'm sorry about whatever you're going through, but you didn't need to bring it to work..."
+    jj "You're fired."
+
+    #later, dialogue needs heeeeaaaavvvvvyyyyy refining
+    mc "I need to tell my mom I got fired..."
+    mc "Mom, I got fired."
+    mom "What? You were supposed to find a date!"
+    mc "It's not about a date anymore."
+    mom "Don't bother showing up to your sister's wedding..."
+    return
