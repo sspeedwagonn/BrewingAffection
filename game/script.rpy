@@ -147,7 +147,7 @@ label start:
 
         menu mw_int_1:
             "Sure, I'll get that started for you!":
-                jump mw_coffee_1
+                mw "Great, thanks!"
 
             ""
 
