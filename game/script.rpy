@@ -97,7 +97,7 @@ label start:
 
     # MC makes it to the coffee shop, it's time themed
     show jj
-    jj "[mc]! Where have you been? You're 7 minutes and 46 seconds late."
+    jj "[mc]! Where have you been? You're 7 meownites and 46 seconds late."
 
     menu where_been:
         "..."
@@ -142,11 +142,12 @@ label start:
     ct "My name is Customer Tutorialman. Do you know how to make coffee?"
 
     menu tutorial_q:
-        "No, I could use a tutorial.":
+        "No, I could use a tutorial. If you happen to do those sort of things...":
             jump tutorial
 
-        "Of course I do.":
-            ct "Well, suit yourself! That's all. I didn't really want a coffee."
+        "Of course I know how to make coffee. Can I get something started for you?":
+            ct "No, thanks. I didn't really want a coffee."
+            mc "Uh, alright then. Huh."
             jump shift_one
 # SHIFT ONE: get to know the potential love interests
     label shift_one:
@@ -171,7 +172,8 @@ label start:
                 $ fired -= 1
 
         if fired = -1: #first and only warning, add this check better later on.
-            jj "[mc]! That's not how we treat customers. Don't forget, this is an at-will employement state. I will fire you if you drive away my customers!"
+            jj "[mc]! That's not how we treat customers. Don't furget, this is an at-will employement state."
+            jj "I will fire you if you can't act like a purrfessional!"
         # End of shift
         # If fired = 3, player gets fired and game ends
         if fired <= -3:
