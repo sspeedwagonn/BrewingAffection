@@ -24,24 +24,13 @@ default anthony = 0
 # The game starts here.
 
 label start:
-
-    # Show a background. This uses a placeholder by default, but you can
-    # add a file (named either "bg room.png" or "bg room.jpg") to the
-    # images directory to show it.
-
-    scene bg room
-
-    # This shows a character sprite. A placeholder is used, but you can
-    # replace it by adding a file named "eileen happy.png" to the images
-    # directory.
-
-    show eileen happy
-
     #Empty room
+    show room
 
     "Oh no, I'm almost late for work!"
 
     #MC appears in front of a mirror
+    show mc
 
     "Looking good... wait, I'm missing something!"
 
@@ -95,7 +84,10 @@ label start:
 
     mc "I guess that means I need to find someone to go with. But I need to get to work! I'm already late."
 
-    # MC makes it to the coffee shop, it's time themed
+    hide room
+    show cafe
+    show mc
+    # MC makes it to the coffee shop
     show jj
     jj "[mc]! Where have you been? You're 7 meownites and 46 seconds late."
 
@@ -161,10 +153,11 @@ label start:
 
         menu mw_int_1:
             "Sure, I'll get that started for you!": #nuetral
-                mw "Great, thanks!"
+                mw "Great, thanks!" # no change, go to making coffee
 
             "Matt White": #pos
-                mc "Matt white"
+                mc "Matt white" #go to an extended interaction, then coffee
+                $ matt += 1
 
             "Hell no!": #neg and fired++
                 unknown "Uh... okay."
