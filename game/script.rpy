@@ -1,23 +1,24 @@
-﻿# The script of the game goes in this file.
-
-# Declare characters used by this game. The color argument colorizes the
-# name of the character.
+﻿#TODO
+# DO THIS
+# BEFORE
+# SUBMITTING!!!!!!!
+# ADD COFFEE MAKING MECHANICS
+# MAKE THE NOISE OF THE ESPRESSO MACHINE MORE RELEVANT
+# ADD CHARACTER ART
 
 define phone = Character("Phone")
 define mom = Character("Mom")
 define jj = Character("Java Joe")
 define em = Character("Espresso Machine")
-define mw = Character("Matt White")
-define ar = Character("Amir Ricano")
-define cb = Character("Cole Blue")
-define bv = Character("Brae Vae")
-define ac = Character("Anthony Cino")
+define mw = Character("Matt White") #quirky business man, corporate guy. he's pretty sweet
+define cb = Character("Cole Blue") # cold and distant at first, but grows to be pretty cool! maybe he's been hurt by a barista once and doesn't want to repeat "the incident"
+define bv = Character("Brae Vae") #the artist, likes to use the cafe to work on her art n stuff
+define ac = Character("Anthony Cino") #rich guy who thinks he's a gift to this world. he's kind of quirky but not in a great way. doesn't want to be with MC if the MC doesnt make bank
 define unknown = Character("???")
 define ct = Character("Customer Tutorialman")
 
 default fired = 0
 default matt = 0
-default amir = 0
 default cole = 0
 default brae = 0
 default anthony = 0
@@ -161,22 +162,49 @@ label start:
             "Sure, I'll get that started for you!": #nuetral
                 mw "Great, thanks!" # no change, go to making coffee
                 $ java += 1 # java joe personally likes it when MC sells coffee and gets to it!
+                $ matt += 1 #he's just really happy for the kindness and help
                 $ fired += 1 # so player has a chance to be rude if they want to later on
+                jump mw_coffee_1
 
             "Sure! I love your tie, by the way!": #pos
-                mw "Oh, thank you. I got it " #go to an extended interaction, then coffee
-                jump mw_ext_1
+                mw "Oh, thank you. I got it from my father, Matt White Sr!" #go to an extended interaction, then coffee
                 $ matt += 2 # matt doesn't get a lot of compliments, so this means a lot to him
                 $ fired += 2
+                jump mw_ext_1
 
             "A flat white? For Matt White? Are you kidding me... no!": #neg and fired++
-                unknown "Uh... okay."
+                mw "Uh... okay."
                 mc "Next!"
                 $ fired -= 1
                 $ matt -= 3
+                jump bv_int_1
 
-        label mw_ext_1: #matt points! get your matt points here!
-            ""
+        label mw_ext_1: #matt points! get your matt points here! he's probably the absolute easiest to romance
+            menu mw_question_1:
+                "So, do you always get a flat white?":
+                    mw ""
+
+                "Are you a businessman?":
+                    mw "Haha, businessman is way too formal. I'm just an accountant."
+                    mc "So you like numbers?"
+                    mw "Mostly the numbers on my paycheck. Other than that, it's a job." #white boy swag moment
+
+                "What's your dad like?": #weird f'in question lmao
+                    mw "Oh, he's uh... dead. Hit by a car."
+                    mc "Oh... I'm sorry to hear."
+                    $matt -= 1
+                    menu recover_matt:
+                        "Should I try to recover this..."
+
+                        "Yes.":
+                            mc "I can comp your coffee... I'm really sorry."
+                            mw "Don't worry about it!"
+                            $ matt += 1
+
+                        "No.":
+                            mc "What kind of car?"
+                            mw "It was a BMW... can I get my coffee?"
+                            $ matt -= 2 #he's strange, but that doesn't mean you can just say whatever and get away with it
 
         label mw_coffee_1:
             #coffee making here
@@ -186,6 +214,9 @@ label start:
                 $ tip += 3
             else:
                 $ tip += 1
+
+        label bv_int_1:
+            show brae
 
 
         if fired = -1: #first and only warning, add this check better later on.
