@@ -21,6 +21,9 @@ default amir = 0
 default cole = 0
 default brae = 0
 default anthony = 0
+default java = 0
+default tips = 0
+default sister = 0
 # The game starts here.
 
 label start:
@@ -42,7 +45,7 @@ label start:
     if not mc:
         $ mc="Brewce"
 
-    mc "And then pronouns..."
+    mc "And then pronouns..." #idk if i need this no one really refers to the MC ever
 
     menu:
         "What are your pronouns?"
@@ -86,9 +89,10 @@ label start:
 
     hide room
     show cafe
-    show mc
+    show mc at right
     # MC makes it to the coffee shop
-    show jj
+    show jj at left
+    with move
     jj "[mc]! Where have you been? You're 7 meownites and 46 seconds late."
 
     menu where_been:
@@ -118,6 +122,7 @@ label start:
     mc "Alright..."
 
     hide jj
+    show mc at center with move
 
     mc "Maybe I can find a customer to be my date to the wedding!"
 
@@ -126,7 +131,8 @@ label start:
 
     mc "I can help the next customer!"
 
-    show ct
+    show ct at left
+    show mc at right with move
     unknown "Hi, can I ask you something?"
 
     mc "Sure..."
@@ -141,28 +147,46 @@ label start:
             ct "No, thanks. I didn't really want a coffee."
             mc "Uh, alright then. Huh."
             jump shift_one
+
 # SHIFT ONE: get to know the potential love interests
     label shift_one:
         hide ct
         mc "Let's get this shift started!"
 
-
         #Introduction to matt white, if the
         show mw
-        unknown "Hi, one flat white, please! For Matt White."
+        mw "Hi, one flat white, please! For Matt White."
 
         menu mw_int_1:
             "Sure, I'll get that started for you!": #nuetral
                 mw "Great, thanks!" # no change, go to making coffee
+                $ java += 1 # java joe personally likes it when MC sells coffee and gets to it!
+                $ fired += 1 # so player has a chance to be rude if they want to later on
 
-            "Matt White": #pos
-                mc "Matt white" #go to an extended interaction, then coffee
-                $ matt += 1
+            "Sure! I love your tie, by the way!": #pos
+                mw "Oh, thank you. I got it " #go to an extended interaction, then coffee
+                jump mw_ext_1
+                $ matt += 2 # matt doesn't get a lot of compliments, so this means a lot to him
+                $ fired += 2
 
-            "Hell no!": #neg and fired++
+            "A flat white? For Matt White? Are you kidding me... no!": #neg and fired++
                 unknown "Uh... okay."
                 mc "Next!"
                 $ fired -= 1
+                $ matt -= 3
+
+        label mw_ext_1: #matt points! get your matt points here!
+            ""
+
+        label mw_coffee_1:
+            #coffee making here
+            mc "Here's your coffee"
+            mw "Wow, that's great!"
+            if matt <= 1: #he's the type of guy to always tip no matter what, but he'll tip extra if he likes MC
+                $ tip += 3
+            else:
+                $ tip += 1
+
 
         if fired = -1: #first and only warning, add this check better later on.
             jj "[mc]! That's not how we treat customers. Don't furget, this is an at-will employement state."
@@ -171,14 +195,22 @@ label start:
         # If fired = 3, player gets fired and game ends
         if fired <= -3:
             jump bad_ending_fired
+
         menu talk_sister_1:
             "Should I text my sister...?"
 
             "I should.":
+                mc "Maybe she'd appreciate hearing about my plan since she wants me to bring a date so bad!"
                 jump text_sister_1
 
             "No, I won't.":
                 mc "She's probably too busy prepping for her wedding."
+                mc "I need to get to bed, anyways."
+                jump day_2
+
+        label text_sister_1:
+        label day_2:
+            label shift_2:
 
 # SHIFT TWO: Get to know them better
 
