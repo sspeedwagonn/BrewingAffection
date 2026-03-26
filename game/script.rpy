@@ -125,7 +125,7 @@ label start:
     hide jj
     show mc at center with move
 
-    mc "Maybe I can find a customer to be my date to the wedding!"
+    mc "Maybe I can find a customer who wants to be my date to the wedding!"
 
     # SHIFT 1: START -- add some sort of title card
     # Bad ending available: getting fired for messing up orders
@@ -174,6 +174,7 @@ label start:
 
             "A flat white? For Matt White? Are you kidding me... no!": #neg and fired++
                 mw "Uh... okay."
+                hide mw
                 mc "Next!"
                 $ fired -= 1
                 $ matt -= 3
@@ -182,7 +183,42 @@ label start:
         label mw_ext_1: #matt points! get your matt points here! he's probably the absolute easiest to romance
             menu mw_question_1:
                 "So, do you always get a flat white?":
-                    mw ""
+                    $ matt += 2
+                    mw "Of course! It's the best."
+                    mc "What do you like most about it?"
+                    mw "The texture. Is that a weird thing to say?"
+                    menu weird_thing:
+                        "I don't think that's weird at all.":
+                            mw "That's good to hear. Can I say something else weird?"
+                            $ matt += 2
+                            menu weird_thing_ext:
+                                "Sure, go for it!":
+                                    mw "Well..."
+                                    mw "I'm glad I came here. You're really nice!"
+                                    mc "That's so sweet! Thank you!"
+                                    mw "I'll have to come again after this. Unfortunately, I have a meeting soon, so I can't stick around!"
+                                    mc "Well, let me get you that flat white, then!"
+                                    $ matt += 3
+                                    jump mw_coffee_1
+
+                                "I'd rather just make your coffee.":
+                                    mw "Oh, yeah, of course!"
+                                    jump mw_coffee_1
+
+                        "I'd think you'd prefer how the coffee flavor is really strong.":
+                            mw "I don't actually like coffee that much."
+                            mc "Really? Why not go for something else?"
+                            mw "Something just draws me to the flat whites. I'm not sure what, though."
+                            $ matt += 1
+                            mc "Well, let me get it started for you then!"
+                            jump mw_coffee_1
+
+                        "You drink coffee... for the texture?":
+                            mw "That was a weird thing to say, then, huh?"
+                            mc "..."
+                            mc "...I'll get that coffee started"
+                            $ matt -= 1
+                            jump mw_coffee_1
 
                 "Are you a businessman?":
                     mw "Haha, businessman is way too formal. I'm just an accountant."
