@@ -97,7 +97,6 @@ label start:
     jj "[mc]! Where have you been? You're 7 meownites and 46 seconds late."
 
     menu where_been:
-        "..."
         "I don't have to explain myself to you, Java Joe.":
             jj "What's with the cattitude?"
 
@@ -159,10 +158,10 @@ label start:
         mw "Hi, one flat white, please! For Matt White."
 
         menu mw_int_1:
-            "Sure, I'll get that started for you!": #nuetral
+            "Sure, I'll get that started for you!": #nuetral -- not sure if i spelt that correctly. neutral?
                 mw "Great, thanks!" # no change, go to making coffee
                 $ java += 1 # java joe personally likes it when MC sells coffee and gets to it!
-                $ matt += 1 #he's just really happy for the kindness and help
+                $ matt += 1 #he's just really happy for the kindness and help. he usually makes coffee at home or at the office - this is a little treat for him
                 $ fired += 1 # so player has a chance to be rude if they want to later on
                 jump mw_coffee_1
 
@@ -205,7 +204,7 @@ label start:
                                     mw "Oh, yeah, of course!"
                                     jump mw_coffee_1
 
-                        "I'd think you'd prefer how the coffee flavor is really strong.":
+                        "I would think you prefer the strong coffee flavor.":
                             mw "I don't actually like coffee that much."
                             mc "Really? Why not go for something else?"
                             mw "Something just draws me to the flat whites. I'm not sure what, though."
@@ -239,8 +238,9 @@ label start:
 
                         "No.":
                             mc "What kind of car?"
-                            mw "It was a BMW... can I get my coffee?"
-                            $ matt -= 2 #he's strange, but that doesn't mean you can just say whatever and get away with it
+                            mw "It was a BMW... can I just get my coffee please?"
+                            $ matt -= 3 #he's strange, but that doesn't mean you can just say whatever and get away with it
+                            # he deadass probably won't come back after this
 
         label mw_coffee_1:
             #coffee making here
@@ -254,10 +254,10 @@ label start:
         label bv_int_1:
             show brae
 
-
-        if fired = -1: #first and only warning, add this check better later on.
-            jj "[mc]! That's not how we treat customers. Don't furget, this is an at-will employement state."
-            jj "I will fire you if you can't act like a purrfessional!"
+        label fired_warning:
+            if fired = -1: #first and only warning, add this check better later on.
+                jj "[mc]! That's not how we treat customers. Don't furget, this is an at-will employement state."
+                jj "I will fire you if you can't act like a purrfessional!"
         # End of shift
         # If fired = 3, player gets fired and game ends
         if fired <= -3:
