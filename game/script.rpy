@@ -8,6 +8,7 @@
 
 define phone = Character("Phone")
 define mom = Character("Mom")
+define s = Character("Sister") #she needs a name
 define jj = Character("Java Joe")
 define em = Character("Espresso Machine")
 define mw = Character("Matt White") #quirky business man, corporate guy. he's pretty sweet
@@ -246,13 +247,27 @@ label start:
             #coffee making here
             mc "Here's your coffee"
             mw "Wow, that's great!"
+            if matt <= 3:
+                $tip += 5
             if matt <= 1: #he's the type of guy to always tip no matter what, but he'll tip extra if he likes MC
-                $ tip += 3
+                $ tip += 2
             else:
                 $ tip += 1
+                jump bv_int_1
 
         label bv_int_1:
+            mc "Next!"
             show brae
+            mc "Hi, what can I make for you?"
+            bv "Hey, what's the wifi password?"
+            menu bv_int_1_ext:
+                "You don't want a coffee?":
+                    bv "Oh, I already got one when I came here."
+                    mc "How long have you been here for?"
+                    bv "As soon as Java Joe unlocked the doors! The cafe is the best place for work, you know!"
+                    menu bv_work:
+                        "What kind of work?":
+                        "":
 
         label fired_warning:
             if fired = -1: #first and only warning, add this check better later on.
@@ -272,21 +287,27 @@ label start:
 
             "No, I won't.":
                 mc "She's probably too busy prepping for her wedding."
-                mc "I need to get to bed, anyways."
-                jump day_2
+                mc "I need to get to bed, anyways..."
+                $ sister -= 1 #maybe mc should talk to their sister... :(
+                jump shift_2
 
         label text_sister_1:
-        label day_2:
-            label shift_2:
+        #there'll be left over texts of attempted communication, kind of one sided
+            mc "Hey!"
+            mc "I'm excited for your wedding!!! How's everything been going?"
+            $sister += 1 #she appreciates the effort but relationships arent repaired in a text
+            s "..." #typing
+            s "👍"
 
-# SHIFT TWO: Get to know them better
+# SHIFT TWO: Get to know them better, one LI drops off
+    label shift_two:
 
 # SHIFT THREE: Ones who the MC shows interest in start to appear frequently, divulge more
-
+    label shift_three:
 # SHIFT FOUR: Based on pursued LI
-
+    label shift_four:
 # SHIFT FIVE: The confession, based on pursued LI
-
+    label shift_five:
 # ENDINGS
     return
 
