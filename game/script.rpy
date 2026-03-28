@@ -26,6 +26,7 @@ default anthony = 0
 default java = 0
 default tips = 0
 default sister = 0
+default braeDraw = false
 # The game starts here.
 
 label start:
@@ -47,18 +48,6 @@ label start:
     if not mc:
         $ mc="Brewce"
 
-    mc "And then pronouns..." #idk if i need this no one really refers to the MC ever
-
-    menu:
-        "What are your pronouns?"
-        "They/them":
-            ## This is how you will set the player's pronouns. This string
-            ## should match the ones you wrote in possible_pronouns.
-            $ pronoun = "they/them"
-        "She/her":
-            $ pronoun = "she/her"
-        "He/him":
-            $ pronoun = "he/him"
     mc "Alright, let's get to work!"
 
     phone "Buzz, buzz... New text from Mom!"
@@ -265,9 +254,33 @@ label start:
                     bv "Oh, I already got one when I came here."
                     mc "How long have you been here for?"
                     bv "As soon as Java Joe unlocked the doors! The cafe is the best place for work, you know!"
-                    menu bv_work:
-                        "What kind of work?":
-                        "":
+                    menu bv_work_1:
+                        "What kind of work?": #showing interest is a good thing
+                            bv "Art. All sorts of art, really!"
+                            mc "So drawing?"
+                        "I didn't see you in here when I came in.": #kind of nuetral or neutral whatever
+                            bv "I like to sit in the far corner."
+                            mc "Why? Hiding from someone?"
+                            bv "Not someone, just everyone."
+                            mc "Everyone?"
+                            bv "That kind of came out weird."
+                            bv "I'm just not ready to show off what I'm making yet, ya know?"
+                            menu bv_work_2:
+                                "Maybe you can start by showing me?":
+                                    bv "I'll have to find one that's really good, then."
+                                    mc "I look forward to it, then. I'm sure you're way better than you give yourself credit for."
+                                    bv "Lower your expectations, but I appreciate it. I really do."
+                                    bv "I'll swing back around with a piece to show you later."
+                                    mc "Still need the wifi password?"
+                                    bv "No, that's alright. I won't need it for this."
+                                    $ braeDraw = true
+                                "I get that. It can be intimidating, for sure.":
+                                    bv "I'm glad you understand."
+                                "If you aren't willing to show it off, it's probably really bad, huh?": #why would you even say this one
+                                    $ brae = 0 #seriously how could you fumble this bad. she will never speak to you ever again
+                                    bv "..." #you fucked up
+                                    bv "I think I'll get going now." #you lost a customer too, but this wont count against fired since you technically werent gonna make her coffee
+
 
         label fired_warning:
             if fired = -1: #first and only warning, add this check better later on.
