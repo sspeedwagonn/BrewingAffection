@@ -28,6 +28,7 @@ default tips = 0
 default sister = 0
 default braeDraw = false
 default texted_1 = false
+default beanControvery = false
 # The game starts here.
 
 label start:
@@ -283,14 +284,24 @@ label start:
                                     bv "How about a breve?"
                                     mc "Gotcha!"
                                     jump bv_coffee_1
-                                "I get that. It can be intimidating, for sure.": #sympathetic, you're sweet here but also playing it safe. This is a very customer service statement
+                                "I get that. It can be intimidating, for sure.": #sympathetic, you're sweet here but also playing it safe. This is a very customer service leaning statement
                                     bv "I'm glad you understand."
                                     bv "So what's that wifi password?"
                                     mc "Oh, it's E]QIG/c1c:zVDC?w. I'll write it down for you!"
                                     bv "Thanks! It's interesting that you can just say the wifi password out loud like that."
                                     mc "It takes practice."
                                     mc "What are you working on now?"
-                                    bv "Researching sculptures."
+                                    bv "Researching sculptures. Ever heard of Cloud Gate?"
+                                    mc "No, never."
+                                    bv "You've seriously never heard of the Bean?"
+                                    mc "Oh, the one in Chicago? That big thing? What about it are you researching?"
+                                    bv "Mostly its controversies."
+                                    mc "What kind of controversies can a statue have?"
+                                    bv "That's what I'm trying to get to the bottom of."
+                                    mc "Right! Well, let me get you the wifi password. Can I get you anything to drink, also?"
+                                    bv "Sure, let's do a breve."
+                                    mc "I can do that for you!"
+                                    $ beanControvery = true
                                 "If you aren't willing to show it off, it's probably really bad, huh?": #why would you even say this one
                                     $ brae = -10 #seriously how could you fumble this bad. she will never speak to you ever again
                                     bv "..." #you fucked up
@@ -323,12 +334,12 @@ label start:
                             jump ac_int_1
                 "Why would I give you the wifi password? Seriously, look at you.":
                     bv "What...?"
-                    bv "Seriously, what?"
+                    bv "Seriously, what the hell is that supposed to mean?"
                     mc "..."
-                    bv "I'm a paying customer. Cafes are spaces for doing work... with wifi."
+                    bv "I'm a paying customer. Cafes are spaces for doing work... with complementary wifi."
                     mc "Cats using computers shouldn't be normalized. Seriously, this is a cat cafe. Have you even been to one of those?"
                     bv "We are anthropomorphic cats, we can do whatever we want."
-                    mc "I'm not arguing with an anthropomorphic cat. Next!"
+                    mc "Anthropomorphic cat or not, I'm not arguing with you. Next!"
                     jump ac_int_1
 
         label bv_coffee_1:
@@ -411,7 +422,10 @@ label start:
         mc "Oh, looks like I got another text from my mom."
         mom "Found a date yet?"
         mom "Your sister wanted to know."
-        if texted_1
+        if texted_1:
+            mc "I was just texting her. Why didn't she ask herself?"
+        else:
+            mc "She really wanted to know?"
     label shift_two:
 
 
