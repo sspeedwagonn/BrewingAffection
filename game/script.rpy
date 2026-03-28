@@ -27,6 +27,7 @@ default java = 0
 default tips = 0
 default sister = 0
 default braeDraw = false
+default texted_1 = false
 # The game starts here.
 
 label start:
@@ -247,13 +248,15 @@ label start:
         label bv_int_1:
             mc "Next!"
             show brae
-            mc "Hi, what can I make for you?"
             bv "Hey, what's the wifi password?"
             menu bv_int_1_ext:
                 "You don't want a coffee?":
                     bv "Oh, I already got one when I came here."
                     mc "How long have you been here for?"
-                    bv "As soon as Java Joe unlocked the doors! The cafe is the best place for work, you know!"
+                    bv "I slipped in as soon as Java Joe unlocked the doors at 5am!"
+                    mc "But we open at 6am..."
+                    bv "Nevermind that."
+                    bv "The cafe is the best place for work, you know!"
                     menu bv_work_1:
                         "What kind of work?": #showing interest is a good thing
                             bv "Art. All sorts of art, really!"
@@ -266,7 +269,7 @@ label start:
                             bv "That kind of came out weird."
                             bv "I'm just not ready to show off what I'm making yet, ya know?"
                             menu bv_work_2:
-                                "Maybe you can start by showing me?":
+                                "Maybe you can start by showing me?": #forward but kind of fire...
                                     bv "I'll have to find one that's really good, then."
                                     mc "I look forward to it, then. I'm sure you're way better than you give yourself credit for."
                                     bv "Lower your expectations, but I appreciate it. I really do."
@@ -274,13 +277,102 @@ label start:
                                     mc "Still need the wifi password?"
                                     bv "No, that's alright. I won't need it for this."
                                     $ braeDraw = true
-                                "I get that. It can be intimidating, for sure.":
+                                    mc "Well let me know if you do!"
+                                    mc "Any coffee I can get for you?"
+                                    bv "You know what... sure!"
+                                    bv "How about a breve?"
+                                    mc "Gotcha!"
+                                    jump bv_coffee_1
+                                "I get that. It can be intimidating, for sure.": #sympathetic, you're sweet here but also playing it safe. This is a very customer service statement
                                     bv "I'm glad you understand."
+                                    bv "So what's that wifi password?"
+                                    mc "Oh, it's E]QIG/c1c:zVDC?w. I'll write it down for you!"
+                                    bv "Thanks! It's interesting that you can just say the wifi password out loud like that."
+                                    mc "It takes practice."
+                                    mc "What are you working on now?"
+                                    bv "Researching sculptures."
                                 "If you aren't willing to show it off, it's probably really bad, huh?": #why would you even say this one
-                                    $ brae = 0 #seriously how could you fumble this bad. she will never speak to you ever again
+                                    $ brae = -10 #seriously how could you fumble this bad. she will never speak to you ever again
                                     bv "..." #you fucked up
-                                    bv "I think I'll get going now." #you lost a customer too, but this wont count against fired since you technically werent gonna make her coffee
+                                    bv "I think I'll just get going now." #you lost a customer too, but this wont count against fired since you technically werent gonna make her coffee
+                                    jump start_ac
+                "It's E]QIG/c1c:zVDC?w":
+                    $ brae += 2 #she appreciates the efficiency
+                    bv "Crazy how you can just say that out loud off the top of your head."
+                    mc "It's one of my many talents."
+                    bv "Reciting a collection of random characters?"
+                    menu random_characters:
+                       "Pretty much. It's like language without structure.":
+                            bv "I like that. That's pretty sick!"
+                            mc "Thank you. Just something I'm naturally talented at. Maybe you're naturally talented at it, too."
+                            bv "I don't believe in natural talent. Well, I guess I believe in predisposition, but regardless, anyone can do anything they want to."
+                            mc "And do you want to recite random characters?"
+                            bv "Not particularly, but I respect your ability."
+                            mc "Thank you. Can I get you a coffee?"
+                            bv "You know what, sure. Are you predisposed to making coffee?"
+                            mc "Just something I'm learning more about every day."
+                            bv ""
+                            mc "I'll get to it, then!"
+                            jump bv_coffee_1
 
+                       "I could teach you how to recite random characters just like me":
+                            bv "I'm good! Thanks for the password, though."
+                            mc "Sure! No coffee?"
+                            bv "I'm still sipping on my first one."
+                            mc "Alright, then. Next!"
+                            jump ac_int_1
+                "Why would I give you the wifi password? Seriously, look at you.":
+                    bv "What...?"
+                    bv "Seriously, what?"
+                    mc "..."
+                    bv "I'm a paying customer. Cafes are spaces for doing work... with wifi."
+                    mc "Cats using computers shouldn't be normalized. Seriously, this is a cat cafe. Have you even been to one of those?"
+                    bv "We are anthropomorphic cats, we can do whatever we want."
+                    mc "I'm not arguing with an anthropomorphic cat. Next!"
+                    jump ac_int_1
+
+        label bv_coffee_1:
+            jump ac_int_1
+
+        label ac_int_1:
+
+        label ac_coffee_1:
+
+        label cb_int_1:
+
+        label cb_coffee_1:
+
+        label end_of_shift:
+            mc "What a great shift! I met so many potential dates."
+            menu which_date_1: #free points
+                "Of everyone I met, I really liked..."
+
+                "Matt White":
+                    $ matt += 1
+                    mc "I hope he stops by again. I think he really enjoyed his drink even though he's not a coffee guy!"
+
+                "Brae Vae":
+                    $ brae += 1
+                    if braeDrawing:
+                        mc "How could I not like her after the drawing she did of me?!"
+                    else:
+                        mc "She's super cool. She also seems like a regular, even though I'm really just noticing her today."
+
+                "Anthony Cino":
+                    $ anthony += 1
+                    mc "I do like them rich. I should make more tips so I can impress him!"
+
+                "Cole Blue":
+                    $ cole += 1
+                    mc "He seemed like he has some issues, but I like 'em like that."
+
+                "Making coffee. No one stood out to me yet.":
+                    $ java += 1
+                    mc "I really enjoy making coffee. It's my thing!"
+
+            mc "Well, time to get back home!"
+            mc "I have a lot to look forward to, all of a sudden."
+            jump go_home_1
 
         label fired_warning:
             if fired = -1: #first and only warning, add this check better later on.
@@ -290,30 +382,38 @@ label start:
         # If fired = 3, player gets fired and game ends
         if fired <= -3:
             jump bad_ending_fired
+        label go_home_1:
+            menu talk_sister_1:
+                "Should I text my sister...?"
 
-        menu talk_sister_1:
-            "Should I text my sister...?"
+                "I should.":
+                    mc "Maybe she'd appreciate hearing about my plan since she wants me to bring a date so bad!"
+                    jump text_sister_1
 
-            "I should.":
-                mc "Maybe she'd appreciate hearing about my plan since she wants me to bring a date so bad!"
-                jump text_sister_1
-
-            "No, I won't.":
-                mc "She's probably too busy prepping for her wedding."
-                mc "I need to get to bed, anyways..."
-                $ sister -= 1 #maybe mc should talk to their sister... :(
-                jump shift_2
+                "No, I won't.":
+                    mc "She's probably too busy prepping for her wedding."
+                    mc "I need to get to bed, anyways..."
+                    $ sister -= 1 #maybe mc should talk to their sister... :(
+                    jump shift_2
 
         label text_sister_1:
+            $ texted_1 = true
         #there'll be left over texts of attempted communication, kind of one sided
             mc "Hey!"
             mc "I'm excited for your wedding!!! How's everything been going?"
-            $sister += 1 #she appreciates the effort but relationships arent repaired in a text
+            $sister += 1 #she appreciates the effort but relationships arent repaired in a single text. or technically two
             s "..." #typing
             s "👍"
 
 # SHIFT TWO: Get to know them better, one LI drops off
+    label day_two:
+        mc "Another day, another shift! I won't be late this time, either."
+        mc "Oh, looks like I got another text from my mom."
+        mom "Found a date yet?"
+        mom "Your sister wanted to know."
+        if texted_1
     label shift_two:
+
 
 # SHIFT THREE: Ones who the MC shows interest in start to appear frequently, divulge more
     label shift_three:
