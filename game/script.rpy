@@ -24,11 +24,11 @@ default cole = 0
 default brae = 0
 default anthony = 0
 default java = 0
-default tips = 0
+default tip = 0
 default sister = 0
-default braeDraw = false
-default texted_1 = false
-default beanControvery = false
+default braeDraw = False
+default texted_1 = False
+default beanControvery = False
 # The game starts here.
 
 label start:
@@ -277,7 +277,7 @@ label start:
                                     bv "I'll swing back around with a piece to show you later."
                                     mc "Still need the wifi password?"
                                     bv "No, that's alright. I won't need it for this."
-                                    $ braeDraw = true
+                                    $ braeDraw = True
                                     mc "Well let me know if you do!"
                                     mc "Any coffee I can get for you?"
                                     bv "You know what... sure!"
@@ -301,7 +301,10 @@ label start:
                                     mc "Right! Well, let me get you the wifi password. Can I get you anything to drink, also?"
                                     bv "Sure, let's do a breve."
                                     mc "I can do that for you!"
-                                    $ beanControvery = true
+                                    $ beanControvery = True
+                                    mc "Think you can tell me what you know about its controveries once you figure it out?"
+                                    bv "Of course!"
+                                    jump bv_coffee_1
                                 "If you aren't willing to show it off, it's probably really bad, huh?": #why would you even say this one
                                     $ brae = -10 #seriously how could you fumble this bad. she will never speak to you ever again
                                     bv "..." #you fucked up
@@ -343,9 +346,12 @@ label start:
                     jump ac_int_1
 
         label bv_coffee_1:
+            #make her coffee here
             jump ac_int_1
 
         label ac_int_1:
+            mc "Hey, there! How's it going?"
+            ac ""
 
         label ac_coffee_1:
 
@@ -408,7 +414,7 @@ label start:
                     jump shift_2
 
         label text_sister_1:
-            $ texted_1 = true
+            $ texted_1 = True
         #there'll be left over texts of attempted communication, kind of one sided
             mc "Hey!"
             mc "I'm excited for your wedding!!! How's everything been going?"
